@@ -4,10 +4,22 @@ const search = () =>{
     fetch(url)
     .then(Response => Response.json())
     .then(data => displaySong(data.data))
+    .catch(error=> displayError('some thing wrong!! please try agin letter!'))
 }
+
+// coll of the async
+
+// const search = async () =>{
+//     const searchText = document.getElementById('serch-fild').value
+//     const url = `https://api.lyrics.ovh/suggest/${searchText}`
+//     const Response = await fetch(url)
+//     const data = await Response.json()
+//     displaySong(data.data)
+// }
+
 const displaySong = songs => {
     const songContainer = document.getElementById('song-container')
-
+    songContainer.innerHTML= ""
     songs.forEach( song => {
         const songDiv = document.createElement('div')
         songDiv.className= "single-result row align-items-center my-3 p-3"
@@ -35,4 +47,7 @@ const getLyric = (title, artist) => {
 const displayLyrics = lyrics => {
     const lyricsDiv = document.getElementById('song-lyrics');
     lyricsDiv.innerText = lyrics;
+}
+const displayError = error => {
+    document.getElementById("error-massage").innerText = error
 }
